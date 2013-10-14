@@ -14,3 +14,6 @@ function [R]=anQR(A)
       R(k:m,k:n)=R(k:m,k:n)-2*(v*(v'*R(k:m,k:n)));
    end
 end
+
+
+%Trouver Q.
