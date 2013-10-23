@@ -1,3 +1,5 @@
-function [x]=ansolveLU(A,b)
-[L,U]=lu(A);
-y=anLu(L,b)
+function [x]=anSolveLU(A,b)
+   [L,U]=anLU(A);
+   y=ltsSolve(L,b);
+   x=utsSolve(U,y);
+end
