@@ -7,7 +7,7 @@ function [L U P] = anPLU(A)
    for k = 1:n-1
       P=eye(n);
       maxIndex=indexMaxAbs(U(:,k));
-      P([1,maxIndex],:)=P([maxIndex,1],:);
+      P([k,maxIndex],:)=P([maxIndex,k],:);
       U=P*U;
       L=eye(n);
       L(k+1:n,k)=-U(k+1:n,k)./U(k,k);
@@ -15,20 +15,20 @@ function [L U P] = anPLU(A)
       pList(k)=P;
       lList(k)=L;
    end
+
    thePright=eye(n);
    thePleft=eye(n);
    for k=n-1:-1:2
-      lpList(k)=thePleft*lList(k)*thePright;
-      thePright=pList(k)*thePright;
-      thePleft=thePleft*pList(k);
+      lpList(k)=thePleft*lList{k}*thePright;
+      thePright=pList{k}*thePright;
+      thePleft=thePleft*pList{k};
    end
-   P=thePleft*P1;
-   L=eye(n)
+   lpList(1)=thePleft*lList{1}*thePright;
+   P=thePleft*pList{1};
+   L=eye(n);
+   lpList;
+   lList;
    for k=n:-1:2
-      L(k:n,k-1)=-lpList(k-1)(k:n,k-1)
+      L(k:n,k-1)=-lpList{k-1}(k:n,k-1);
    end
 end
-
-
-
-
