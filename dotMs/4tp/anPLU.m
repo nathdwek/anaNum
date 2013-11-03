@@ -11,7 +11,7 @@ function [L U P] = anPLU(A)
    for k = 1:n-1
       P=eye(n); %nouvelle matrice de permutation identité
       maxIndex=indexMaxAbs(U(:,k)); %trouver la position de l'élément le plus grand en valeur absolue dans la colonne considérée
-      P([k,maxIndex],:)=P([maxIndex,k],:); %former la matrice de permuation pour amener cet élément sur la diagonale
+      P([k,maxIndex],:)=P([maxIndex,k],:); %former la matrice de permutation pour amener cet élément sur la diagonale
       U=P*U;
       L=eye(n); %nouvelle matrice d'élimination
       L(k+1:n,k)=-U(k+1:n,k)./U(k,k); %Gauss
@@ -22,8 +22,8 @@ function [L U P] = anPLU(A)
 
    %formation de P et d'une liste de Lprims; à partir de la liste des P des L successifs
    thePright=pList{end}; %le produit de matrices qui va multiplier à droite
-   thePleft=pList{end}; %le produit de matrices qui va multiplier à droite
-   lpList(n-1)=lList(end); %la première Lprim formée (correspondant à la dernière matrice d'élimination L) est égale à cette matrice L lui correspondant (ex:n=4: Lp3=L3)
+   thePleft=pList{end}; %le produit de matrices qui va multiplier à gauche
+   lpList(n-1)=lList(end); %la première Lprim formée (correspondant à la dernière matrice d'élimination L) est égale à cette matrice L lui correspondant (ex: n=4: Lp3=L3)
    for k=n-2:-1:1 %cf pdf
       lpList(k)=thePleft*lList{k}*thePright; %ex: Lp2=P4*P3*L2*P3*P4
       thePright=pList{k}*thePright; %ex: Pdroite=P2*Pdroite=P2*P3*P4
