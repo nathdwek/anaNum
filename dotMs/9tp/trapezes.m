@@ -1,5 +1,6 @@
-function [aire]=trapezes(f,a,b,h)
-   n=ceil((b-a)/h);
+function [aire]=trapezes(f,a,b,hMax)
+   n=ceil((b-a)/hMax);
+   h=(b-a)/n;
    aire=0;
    for i=1:n
       aire=aire+(f(a+h*(i-1))+f(a+i*h));
